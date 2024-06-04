@@ -48,7 +48,7 @@ class Mamba(nn.Module):
         bias=False,
         use_fast_path=True,  # Fused kernel options
         layer_idx=None,
-        device=None,
+        device="cuda",
         dtype=None,
         init_layer_scale=None,
     ):
