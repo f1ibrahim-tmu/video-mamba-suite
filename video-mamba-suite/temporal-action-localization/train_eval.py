@@ -22,6 +22,9 @@ from libs.utils import (train_one_epoch, valid_one_epoch, ANETdetection,
 
 
 ################################################################################
+device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+
+
 def main(args):
     """main function that handles training / inference"""
 
@@ -74,6 +77,7 @@ def main(args):
     model = make_meta_arch(cfg['model_name'], **cfg['model'])
     # not ideal for multi GPU training, ok for now
     model = nn.DataParallel(model, device_ids=cfg['devices'])
+    model = model.to(device)
     # optimizer
     optimizer = make_optimizer(model, cfg['opt'])
     # schedule
@@ -134,7 +138,7 @@ def main(args):
     for epoch in range(args.start_epoch, max_epochs):
         # train for one epoch
         train_one_epoch(
-            train_loader,
+            train_loader.to(device),
             model,
             optimizer,
             scheduler,
@@ -154,6 +158,8 @@ def main(args):
             model_eval = make_meta_arch(cfg['model_name'], **cfg['model'])
             # not ideal for multi GPU training, ok for now
             model_eval = nn.DataParallel(model_eval, device_ids=cfg['devices'])
+
+            model_eval = model_eval.to(device)
 
 
             model_eval.load_state_dict(model_ema.module.state_dict())
