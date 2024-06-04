@@ -138,7 +138,7 @@ def main(args):
     for epoch in range(args.start_epoch, max_epochs):
         # train for one epoch
         train_one_epoch(
-            train_loader.to(device),
+            train_loader,
             model,
             optimizer,
             scheduler,
