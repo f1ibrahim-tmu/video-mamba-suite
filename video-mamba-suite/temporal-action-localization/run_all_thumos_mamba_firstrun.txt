@@ -1,0 +1,706 @@
+(video-mamba-suite) root@ea7437f05766:/data/fady/aar/video-mamba-suite/video-mamba-suite/temporal-action-localization# bash run_all_thumos_mamba.sh 
+{'dataset': {'crop_ratio': [0.9, 1.0],
+             'default_fps': None,
+             'downsample_rate': 1,
+             'feat_folder': './data/thumos/thumos14_internvideo2_6b_w16_s4/thumos14_6b/',
+             'feat_stride': 4,
+             'feature_type': '_spatial_feature',
+             'file_ext': '.pt',
+             'file_prefix': None,
+             'force_upsampling': False,
+             'input_dim': 3200,
+             'json_file': './data/thumos/annotations/thumos14.json',
+             'max_seq_len': 2304,
+             'num_classes': 20,
+             'num_frames': 16,
+             'trunc_thresh': 0.5},
+ 'dataset_name': 'thumos_new',
+ 'devices': ['cuda:0'],
+ 'init_rand_seed': 1234567891,
+ 'loader': {'batch_size': 2, 'num_workers': 2},
+ 'model': {'backbone_arch': [2, 2, 5],
+           'backbone_type': 'mamba',
+           'embd_dim': 512,
+           'embd_kernel_size': 3,
+           'embd_with_ln': True,
+           'fpn_dim': 512,
+           'fpn_type': 'identity',
+           'fpn_with_ln': True,
+           'head_dim': 512,
+           'head_kernel_size': 3,
+           'head_num_layers': 3,
+           'head_with_ln': True,
+           'input_dim': 3200,
+           'max_buffer_len_factor': 6.0,
+           'max_seq_len': 2304,
+           'n_head': 4,
+           'n_mha_win_size': 19,
+           'num_classes': 20,
+           'regression_range': [(0, 4),
+                                (4, 8),
+                                (8, 16),
+                                (16, 32),
+                                (32, 64),
+                                (64, 10000)],
+           'scale_factor': 2,
+           'test_cfg': {'duration_thresh': 0.05,
+                        'ext_score_file': None,
+                        'iou_threshold': 0.1,
+                        'max_seg_num': 200,
+                        'min_score': 0.001,
+                        'multiclass_nms': True,
+                        'nms_method': 'soft',
+                        'nms_sigma': 0.5,
+                        'pre_nms_thresh': 0.001,
+                        'pre_nms_topk': 2000,
+                        'voting_thresh': 0.7},
+           'train_cfg': {'center_sample': 'radius',
+                         'center_sample_radius': 1.5,
+                         'clip_grad_l2norm': 1.0,
+                         'cls_prior_prob': 0.01,
+                         'dropout': 0.0,
+                         'droppath': 0.1,
+                         'head_empty_cls': [],
+                         'init_loss_norm': 100,
+                         'label_smoothing': 0.0,
+                         'loss_weight': 1.0},
+           'use_abs_pe': False,
+           'use_rel_pe': False},
+ 'model_name': 'LocPointTransformer',
+ 'opt': {'epochs': 45,
+         'learning_rate': 0.0001,
+         'momentum': 0.9,
+         'schedule_gamma': 0.1,
+         'schedule_steps': [],
+         'schedule_type': 'cosine',
+         'type': 'AdamW',
+         'warmup': True,
+         'warmup_epochs': 5,
+         'weight_decay': 0.05},
+ 'output_folder': './ckpt_thumos/',
+ 'test_cfg': {'duration_thresh': 0.05,
+              'ext_score_file': None,
+              'iou_threshold': 0.1,
+              'max_seg_num': 200,
+              'min_score': 0.001,
+              'multiclass_nms': True,
+              'nms_method': 'soft',
+              'nms_sigma': 0.5,
+              'pre_nms_thresh': 0.001,
+              'pre_nms_topk': 2000,
+              'voting_thresh': 0.7},
+ 'train_cfg': {'center_sample': 'radius',
+               'center_sample_radius': 1.5,
+               'clip_grad_l2norm': 1.0,
+               'cls_prior_prob': 0.01,
+               'dropout': 0.0,
+               'droppath': 0.1,
+               'head_empty_cls': [],
+               'init_loss_norm': 100,
+               'label_smoothing': 0.0,
+               'loss_weight': 1.0},
+ 'train_split': ['validation'],
+ 'val_split': ['test']}
+Using model EMA ...
+
+Start training model LocPointTransformer ...
+
+[Train]: Epoch 0 started
+/data/fady/aar/video_features/miniconda3/envs/video-mamba-suite/lib/python3.9/site-packages/torch/nn/modules/conv.py:306: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return F.conv1d(input, weight, bias, self.stride,
+/data/fady/aar/video_features/miniconda3/envs/video-mamba-suite/lib/python3.9/site-packages/torch/autograd/graph.py:744: UserWarning: Plan failed with a cudnnException: CUDNN_BACKEND_EXECUTION_PLAN_DESCRIPTOR: cudnnFinalize Descriptor Failed cudnn_status: CUDNN_STATUS_NOT_SUPPORTED (Triggered internally at ../aten/src/ATen/native/cudnn/Conv_v8.cpp:919.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+
+[Train]: Epoch 1 started
+
+[Train]: Epoch 2 started
+
+[Train]: Epoch 3 started
+
+[Train]: Epoch 4 started
+
+[Train]: Epoch 5 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 57.43 (%)
+|tIoU = 0.40: mAP = 48.20 (%)
+|tIoU = 0.50: mAP = 35.75 (%)
+|tIoU = 0.60: mAP = 23.63 (%)
+|tIoU = 0.70: mAP = 12.60 (%)
+Avearge mAP: 35.52 (%)
+5 0.3552077860769471
+
+[Train]: Epoch 6 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 67.76 (%)
+|tIoU = 0.40: mAP = 59.85 (%)
+|tIoU = 0.50: mAP = 48.06 (%)
+|tIoU = 0.60: mAP = 34.87 (%)
+|tIoU = 0.70: mAP = 20.71 (%)
+Avearge mAP: 46.25 (%)
+6 0.46249351239493136
+
+[Train]: Epoch 7 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 72.79 (%)
+|tIoU = 0.40: mAP = 66.06 (%)
+|tIoU = 0.50: mAP = 54.63 (%)
+|tIoU = 0.60: mAP = 40.47 (%)
+|tIoU = 0.70: mAP = 24.43 (%)
+Avearge mAP: 51.67 (%)
+7 0.5167445831300176
+
+[Train]: Epoch 8 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 75.37 (%)
+|tIoU = 0.40: mAP = 69.67 (%)
+|tIoU = 0.50: mAP = 58.50 (%)
+|tIoU = 0.60: mAP = 43.18 (%)
+|tIoU = 0.70: mAP = 26.04 (%)
+Avearge mAP: 54.55 (%)
+8 0.545530560313931
+
+[Train]: Epoch 9 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 76.89 (%)
+|tIoU = 0.40: mAP = 71.51 (%)
+|tIoU = 0.50: mAP = 60.34 (%)
+|tIoU = 0.60: mAP = 46.25 (%)
+|tIoU = 0.70: mAP = 28.28 (%)
+Avearge mAP: 56.66 (%)
+9 0.5665609446679496
+
+[Train]: Epoch 10 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 77.93 (%)
+|tIoU = 0.40: mAP = 72.57 (%)
+|tIoU = 0.50: mAP = 62.29 (%)
+|tIoU = 0.60: mAP = 47.93 (%)
+|tIoU = 0.70: mAP = 29.52 (%)
+Avearge mAP: 58.05 (%)
+10 0.5804925514625483
+
+[Train]: Epoch 11 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 78.21 (%)
+|tIoU = 0.40: mAP = 73.23 (%)
+|tIoU = 0.50: mAP = 63.85 (%)
+|tIoU = 0.60: mAP = 49.88 (%)
+|tIoU = 0.70: mAP = 30.60 (%)
+Avearge mAP: 59.16 (%)
+11 0.5915567622119867
+
+[Train]: Epoch 12 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 78.85 (%)
+|tIoU = 0.40: mAP = 74.21 (%)
+|tIoU = 0.50: mAP = 65.19 (%)
+|tIoU = 0.60: mAP = 50.98 (%)
+|tIoU = 0.70: mAP = 32.28 (%)
+Avearge mAP: 60.30 (%)
+12 0.6030195799175617
+
+[Train]: Epoch 13 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 79.45 (%)
+|tIoU = 0.40: mAP = 74.96 (%)
+|tIoU = 0.50: mAP = 65.77 (%)
+|tIoU = 0.60: mAP = 51.77 (%)
+|tIoU = 0.70: mAP = 33.61 (%)
+Avearge mAP: 61.11 (%)
+13 0.6110998853789354
+
+[Train]: Epoch 14 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 80.93 (%)
+|tIoU = 0.40: mAP = 76.22 (%)
+|tIoU = 0.50: mAP = 67.22 (%)
+|tIoU = 0.60: mAP = 53.70 (%)
+|tIoU = 0.70: mAP = 35.85 (%)
+Avearge mAP: 62.78 (%)
+14 0.6278455908662874
+
+[Train]: Epoch 15 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 81.59 (%)
+|tIoU = 0.40: mAP = 76.90 (%)
+|tIoU = 0.50: mAP = 68.53 (%)
+|tIoU = 0.60: mAP = 56.00 (%)
+|tIoU = 0.70: mAP = 37.56 (%)
+Avearge mAP: 64.12 (%)
+15 0.6411609801003155
+
+[Train]: Epoch 16 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 82.45 (%)
+|tIoU = 0.40: mAP = 77.93 (%)
+|tIoU = 0.50: mAP = 69.61 (%)
+|tIoU = 0.60: mAP = 57.58 (%)
+|tIoU = 0.70: mAP = 38.96 (%)
+Avearge mAP: 65.30 (%)
+16 0.6530421279779147
+
+[Train]: Epoch 17 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 83.35 (%)
+|tIoU = 0.40: mAP = 78.81 (%)
+|tIoU = 0.50: mAP = 70.62 (%)
+|tIoU = 0.60: mAP = 58.90 (%)
+|tIoU = 0.70: mAP = 40.54 (%)
+Avearge mAP: 66.44 (%)
+17 0.6644445138004216
+
+[Train]: Epoch 18 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 84.36 (%)
+|tIoU = 0.40: mAP = 79.64 (%)
+|tIoU = 0.50: mAP = 72.03 (%)
+|tIoU = 0.60: mAP = 60.31 (%)
+|tIoU = 0.70: mAP = 41.76 (%)
+Avearge mAP: 67.62 (%)
+18 0.6762118975344739
+
+[Train]: Epoch 19 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 84.87 (%)
+|tIoU = 0.40: mAP = 80.62 (%)
+|tIoU = 0.50: mAP = 73.09 (%)
+|tIoU = 0.60: mAP = 61.53 (%)
+|tIoU = 0.70: mAP = 43.12 (%)
+Avearge mAP: 68.65 (%)
+19 0.6864792694805163
+
+[Train]: Epoch 20 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 85.39 (%)
+|tIoU = 0.40: mAP = 81.25 (%)
+|tIoU = 0.50: mAP = 73.67 (%)
+|tIoU = 0.60: mAP = 61.92 (%)
+|tIoU = 0.70: mAP = 44.27 (%)
+Avearge mAP: 69.30 (%)
+20 0.6930238840121355
+
+[Train]: Epoch 21 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 85.75 (%)
+|tIoU = 0.40: mAP = 81.46 (%)
+|tIoU = 0.50: mAP = 74.14 (%)
+|tIoU = 0.60: mAP = 62.50 (%)
+|tIoU = 0.70: mAP = 45.58 (%)
+Avearge mAP: 69.89 (%)
+21 0.6988547162620622
+
+[Train]: Epoch 22 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.06 (%)
+|tIoU = 0.40: mAP = 81.69 (%)
+|tIoU = 0.50: mAP = 74.67 (%)
+|tIoU = 0.60: mAP = 63.93 (%)
+|tIoU = 0.70: mAP = 46.64 (%)
+Avearge mAP: 70.60 (%)
+22 0.7060056895439848
+
+[Train]: Epoch 23 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.38 (%)
+|tIoU = 0.40: mAP = 81.88 (%)
+|tIoU = 0.50: mAP = 74.80 (%)
+|tIoU = 0.60: mAP = 64.87 (%)
+|tIoU = 0.70: mAP = 47.42 (%)
+Avearge mAP: 71.07 (%)
+23 0.7106849392280453
+
+[Train]: Epoch 24 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.42 (%)
+|tIoU = 0.40: mAP = 82.16 (%)
+|tIoU = 0.50: mAP = 75.36 (%)
+|tIoU = 0.60: mAP = 64.96 (%)
+|tIoU = 0.70: mAP = 47.68 (%)
+Avearge mAP: 71.32 (%)
+24 0.7131833997801655
+
+[Train]: Epoch 25 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.63 (%)
+|tIoU = 0.40: mAP = 82.51 (%)
+|tIoU = 0.50: mAP = 75.32 (%)
+|tIoU = 0.60: mAP = 65.43 (%)
+|tIoU = 0.70: mAP = 47.70 (%)
+Avearge mAP: 71.52 (%)
+25 0.7151930387034688
+
+[Train]: Epoch 26 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.73 (%)
+|tIoU = 0.40: mAP = 82.49 (%)
+|tIoU = 0.50: mAP = 75.62 (%)
+|tIoU = 0.60: mAP = 65.79 (%)
+|tIoU = 0.70: mAP = 48.26 (%)
+Avearge mAP: 71.78 (%)
+26 0.7177825232961556
+
+[Train]: Epoch 27 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.80 (%)
+|tIoU = 0.40: mAP = 82.37 (%)
+|tIoU = 0.50: mAP = 76.03 (%)
+|tIoU = 0.60: mAP = 66.13 (%)
+|tIoU = 0.70: mAP = 49.07 (%)
+Avearge mAP: 72.08 (%)
+27 0.7207988710190772
+
+[Train]: Epoch 28 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.78 (%)
+|tIoU = 0.40: mAP = 82.33 (%)
+|tIoU = 0.50: mAP = 76.04 (%)
+|tIoU = 0.60: mAP = 66.32 (%)
+|tIoU = 0.70: mAP = 49.29 (%)
+Avearge mAP: 72.15 (%)
+28 0.7215285597152776
+
+[Train]: Epoch 29 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.74 (%)
+|tIoU = 0.40: mAP = 82.61 (%)
+|tIoU = 0.50: mAP = 76.11 (%)
+|tIoU = 0.60: mAP = 66.33 (%)
+|tIoU = 0.70: mAP = 49.70 (%)
+Avearge mAP: 72.30 (%)
+29 0.7229864247204822
+
+[Train]: Epoch 30 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.90 (%)
+|tIoU = 0.40: mAP = 82.68 (%)
+|tIoU = 0.50: mAP = 76.12 (%)
+|tIoU = 0.60: mAP = 66.37 (%)
+|tIoU = 0.70: mAP = 49.85 (%)
+Avearge mAP: 72.38 (%)
+30 0.7238345783325479
+
+[Train]: Epoch 31 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.83 (%)
+|tIoU = 0.40: mAP = 82.48 (%)
+|tIoU = 0.50: mAP = 76.01 (%)
+|tIoU = 0.60: mAP = 66.18 (%)
+|tIoU = 0.70: mAP = 50.02 (%)
+Avearge mAP: 72.30 (%)
+31 0.7230493349099815
+
+[Train]: Epoch 32 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.91 (%)
+|tIoU = 0.40: mAP = 82.56 (%)
+|tIoU = 0.50: mAP = 76.11 (%)
+|tIoU = 0.60: mAP = 65.76 (%)
+|tIoU = 0.70: mAP = 50.09 (%)
+Avearge mAP: 72.29 (%)
+32 0.7228597166002145
+
+[Train]: Epoch 33 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.96 (%)
+|tIoU = 0.40: mAP = 82.45 (%)
+|tIoU = 0.50: mAP = 76.19 (%)
+|tIoU = 0.60: mAP = 65.79 (%)
+|tIoU = 0.70: mAP = 50.36 (%)
+Avearge mAP: 72.35 (%)
+33 0.7234928833843132
+
+[Train]: Epoch 34 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.91 (%)
+|tIoU = 0.40: mAP = 82.50 (%)
+|tIoU = 0.50: mAP = 75.98 (%)
+|tIoU = 0.60: mAP = 65.67 (%)
+|tIoU = 0.70: mAP = 50.21 (%)
+Avearge mAP: 72.26 (%)
+34 0.7225587635550793
+
+[Train]: Epoch 35 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.90 (%)
+|tIoU = 0.40: mAP = 82.46 (%)
+|tIoU = 0.50: mAP = 75.89 (%)
+|tIoU = 0.60: mAP = 65.55 (%)
+|tIoU = 0.70: mAP = 50.09 (%)
+Avearge mAP: 72.18 (%)
+35 0.7217975212868867
+
+[Train]: Epoch 36 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.88 (%)
+|tIoU = 0.40: mAP = 82.54 (%)
+|tIoU = 0.50: mAP = 76.13 (%)
+|tIoU = 0.60: mAP = 65.42 (%)
+|tIoU = 0.70: mAP = 50.36 (%)
+Avearge mAP: 72.26 (%)
+36 0.7226455936477244
+
+[Train]: Epoch 37 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.64 (%)
+|tIoU = 0.40: mAP = 82.47 (%)
+|tIoU = 0.50: mAP = 76.31 (%)
+|tIoU = 0.60: mAP = 65.34 (%)
+|tIoU = 0.70: mAP = 50.42 (%)
+Avearge mAP: 72.24 (%)
+37 0.7223699173948616
+
+[Train]: Epoch 38 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.45 (%)
+|tIoU = 0.40: mAP = 82.32 (%)
+|tIoU = 0.50: mAP = 76.02 (%)
+|tIoU = 0.60: mAP = 65.18 (%)
+|tIoU = 0.70: mAP = 50.30 (%)
+Avearge mAP: 72.05 (%)
+38 0.7205258684657576
+
+[Train]: Epoch 39 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.39 (%)
+|tIoU = 0.40: mAP = 82.17 (%)
+|tIoU = 0.50: mAP = 75.95 (%)
+|tIoU = 0.60: mAP = 65.03 (%)
+|tIoU = 0.70: mAP = 50.34 (%)
+Avearge mAP: 71.98 (%)
+39 0.7197644001976355
+
+[Train]: Epoch 40 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.26 (%)
+|tIoU = 0.40: mAP = 82.16 (%)
+|tIoU = 0.50: mAP = 75.69 (%)
+|tIoU = 0.60: mAP = 64.94 (%)
+|tIoU = 0.70: mAP = 50.06 (%)
+Avearge mAP: 71.82 (%)
+40 0.7182126804883799
+
+[Train]: Epoch 41 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.18 (%)
+|tIoU = 0.40: mAP = 82.06 (%)
+|tIoU = 0.50: mAP = 75.73 (%)
+|tIoU = 0.60: mAP = 64.81 (%)
+|tIoU = 0.70: mAP = 49.73 (%)
+Avearge mAP: 71.70 (%)
+41 0.7170301420627989
+
+[Train]: Epoch 42 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.13 (%)
+|tIoU = 0.40: mAP = 82.00 (%)
+|tIoU = 0.50: mAP = 75.73 (%)
+|tIoU = 0.60: mAP = 64.68 (%)
+|tIoU = 0.70: mAP = 49.46 (%)
+Avearge mAP: 71.60 (%)
+42 0.7159829483480509
+
+[Train]: Epoch 43 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 86.02 (%)
+|tIoU = 0.40: mAP = 81.86 (%)
+|tIoU = 0.50: mAP = 75.71 (%)
+|tIoU = 0.60: mAP = 64.64 (%)
+|tIoU = 0.70: mAP = 49.31 (%)
+Avearge mAP: 71.51 (%)
+43 0.7150780201978431
+
+[Train]: Epoch 44 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 85.96 (%)
+|tIoU = 0.40: mAP = 81.75 (%)
+|tIoU = 0.50: mAP = 75.63 (%)
+|tIoU = 0.60: mAP = 64.48 (%)
+|tIoU = 0.70: mAP = 49.23 (%)
+Avearge mAP: 71.41 (%)
+44 0.7141065416315016
+
+[Train]: Epoch 45 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 85.92 (%)
+|tIoU = 0.40: mAP = 81.70 (%)
+|tIoU = 0.50: mAP = 75.59 (%)
+|tIoU = 0.60: mAP = 64.83 (%)
+|tIoU = 0.70: mAP = 49.20 (%)
+Avearge mAP: 71.45 (%)
+45 0.7145031333975225
+
+[Train]: Epoch 46 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 85.79 (%)
+|tIoU = 0.40: mAP = 81.59 (%)
+|tIoU = 0.50: mAP = 75.48 (%)
+|tIoU = 0.60: mAP = 64.67 (%)
+|tIoU = 0.70: mAP = 49.07 (%)
+Avearge mAP: 71.32 (%)
+46 0.7131942975173083
+
+[Train]: Epoch 47 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 85.63 (%)
+|tIoU = 0.40: mAP = 81.52 (%)
+|tIoU = 0.50: mAP = 75.79 (%)
+|tIoU = 0.60: mAP = 64.37 (%)
+|tIoU = 0.70: mAP = 48.92 (%)
+Avearge mAP: 71.25 (%)
+47 0.7124830790157736
+
+[Train]: Epoch 48 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 85.44 (%)
+|tIoU = 0.40: mAP = 81.42 (%)
+|tIoU = 0.50: mAP = 75.73 (%)
+|tIoU = 0.60: mAP = 64.21 (%)
+|tIoU = 0.70: mAP = 48.72 (%)
+Avearge mAP: 71.10 (%)
+48 0.7110295192934742
+
+[Train]: Epoch 49 started
+
+Start testing model LocPointTransformer ...
+[RESULTS] Action detection results on thumos14.
+
+|tIoU = 0.30: mAP = 85.23 (%)
+|tIoU = 0.40: mAP = 81.25 (%)
+|tIoU = 0.50: mAP = 75.61 (%)
+|tIoU = 0.60: mAP = 64.11 (%)
+|tIoU = 0.70: mAP = 48.62 (%)
+Avearge mAP: 70.97 (%)
+49 0.7096515046367416
+All done!
